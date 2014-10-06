@@ -18,6 +18,3 @@ for (i in numitems) {
 }
 out = data.frame(output)
 names(out) = c('ItemSampleSize', 'NumberPreyTypes')
-
-This is practice for pushing
-============================
