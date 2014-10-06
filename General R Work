@@ -1,1 +1,7 @@
 #Exploring species interactions/predation/prey using R tools
+
+
+#For limiting data within a certain range of coordinates:
+
+caribbean.elasmos= subset(elasmos, latitude>10, longitude>-140)
+caribelasmos= subset(caribbean.elasmos, latitude<=30)
