@@ -1,0 +1,20 @@
+preyitems = data.frame(table(yos$Prey.Species.Name))
+preyitems2 = preyitems[preyitems$Var1 != "", ]
+preyitems2 = preyitems2[order(preyitems2$Freq, decreasing = T), ]
+
+
+numitems = c(2, 10, 50, 100, 1000)
+
+numsamples = 1000
+
+output = c()
+
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    dietsamp = sample(preyitems2$Var1, i, prob = preyitems2$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
+  }
+}
+out = data.frame(output)
+names(out) = c('ItemSampleSize', 'NumberPreyTypes')
