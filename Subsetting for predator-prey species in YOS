@@ -1,0 +1,14 @@
+> predatorspecies = c('Predator1', 'Predator2', 'Predator3')
+> yos.subset = subset (yos, Predator.Species.Name %in% predatorspecies)
+Error in match(x, table, nomatch = 0L) : 
+  object 'Predator.Species.Name' not found
+> preylist = yos[Predator.Species.Name %in% predatorspecies, 'Prey.Species.Name']
+Error in match(x, table, nomatch = 0L) : 
+  object 'Predator.Species.Name' not found
+> names(yos)
+[1] "Latitude"              "Longitude"             "Year"                 
+[4] "ICES.StomachID"        "Predator"              "Predator..mean..Lengh"
+[7] "Prey.Species.Name"    
+> preylist = yos[Predator %in% predatorspecies, 'Prey.Species.Name']
+Error in match(x, table, nomatch = 0L) : object 'Predator' not found
+> preylist = yos[yos$Predator %in% predatorspecies, 'Prey.Species.Name']
