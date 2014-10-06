@@ -1,0 +1,60 @@
+> table(p1)
+p1
+0    1 
+3460  214 
+> data.frame(table(p1))
+p1 Freq
+1  0 3460
+2  1  214
+> df = data.frame(spid = rep(c('a','b','c'), 3), abund = runif(9))
+> df
+spid     abund
+1    a 0.8712581
+2    b 0.7261759
+3    c 0.5605622
+4    a 0.9703218
+5    b 0.2490052
+6    c 0.4686005
+7    a 0.7331293
+8    b 0.2433547
+9    c 0.2514110
+> taxon = data.frame(spid = c('a','b','c'), family = c('dsfks', 'asdfkj', 'jje'))
+> taxon
+spid family
+1    a  dsfks
+2    b asdfkj
+3    c    jje
+> df2 = merge(df, taxon, by.x = 'spid', by.y = 'spid', all.x = T)
+> df2
+spid     abund family
+1    a 0.8712581  dsfks
+2    a 0.7331293  dsfks
+3    a 0.9703218  dsfks
+4    b 0.7261759 asdfkj
+5    b 0.2490052 asdfkj
+6    b 0.2433547 asdfkj
+7    c 0.4686005    jje
+8    c 0.5605622    jje
+9    c 0.2514110    jje
+> df2[order(df$abund, decreasing=T), ]
+spid     abund family
+4    b 0.7261759 asdfkj
+1    a 0.8712581  dsfks
+7    c 0.4686005    jje
+2    a 0.7331293  dsfks
+3    a 0.9703218  dsfks
+6    b 0.2433547 asdfkj
+9    c 0.2514110    jje
+5    b 0.2490052 asdfkj
+8    c 0.5605622    jje
+> df2[order(df2$abund, decreasing=T), ]
+spid     abund family
+3    a 0.9703218  dsfks
+1    a 0.8712581  dsfks
+2    a 0.7331293  dsfks
+4    b 0.7261759 asdfkj
+8    c 0.5605622    jje
+7    c 0.4686005    jje
+9    c 0.2514110    jje
+5    b 0.2490052 asdfkj
+6    b 0.2433547 asdfkj
