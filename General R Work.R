@@ -21,6 +21,6 @@ char.lowlatelasmos = as.character(unique(lowlat.elasmos$source_taxon_name))
 library(taxize)
 classification(char.lowlatelasmos, db = 'itis')
 
+#Uploaded carcharhiniformes diet data from globi using CURL in bash
+curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv
 
-
-                      
