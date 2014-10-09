@@ -1,6 +1,6 @@
 #Exploring species interactions/predation/prey using R tools
 ============================================================
-
+  
 #subsetting all elasmobranchs into certain columns of interest
 elasmos = subset(elasmobranchs, select= c(1,3,4,5,9,10))
 
@@ -20,3 +20,4 @@ greathammer.prey = data.frame(c(rep("Sphyrna lewini",14)),(c(preynames))
 char.lowlatelasmos = as.character(unique(lowlat.elasmos$source_taxon_name))
 library(taxize)
 classification(char.lowlatelasmos, db = 'itis')
+                            
