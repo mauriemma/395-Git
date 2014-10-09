@@ -20,4 +20,7 @@ greathammer.prey = data.frame(c(rep("Sphyrna lewini",14)),(c(preynames))
 char.lowlatelasmos = as.character(unique(lowlat.elasmos$source_taxon_name))
 library(taxize)
 classification(char.lowlatelasmos, db = 'itis')
-                            
+
+
+
+                      
