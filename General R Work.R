@@ -10,7 +10,7 @@ lowlat.elasmos = subset(elasmos, latitude>=0&latitude<=30&longitude>=-115&longit
 highlat.elasmos = subset(elasmos, latitude>30&longitude>=-115&longitude<=60)
 
 #Subsetting data for a single species:
-greathammerhead = subset(elasmos, source_taxon_name=="Sphyrna mokarran")
+
 
 #Creating list of species and unique prey types
 preynames = c(as.character(WHATEVER LIST OR GROUP OF PREY))
@@ -23,3 +23,5 @@ classification(char.lowlatelasmos, db = 'itis')
 
 #Uploaded carcharhiniformes diet data from globi using CURL in bash
 curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv
+
+#Limit high and low lat sharks by species avg anatomical length
