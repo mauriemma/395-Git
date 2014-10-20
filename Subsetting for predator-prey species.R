@@ -1,6 +1,7 @@
 #Looking at prey species of multiple preds
 predatorspecies = c('Predator1', 'Predator2', 'Predator3')
 
+#Making subset of data for a single predator species
 yos.subset = subset (yos, Predator.Species.Name %in% predatorspecies)
 
 preylist = yos[Predator.Species.Name %in% predatorspecies, 'Prey.Species.Name']
