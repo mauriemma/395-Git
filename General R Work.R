@@ -28,4 +28,8 @@ curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?in
 highlat.tab = data.frame(table(highlat.sharks$source_taxon_name))
 lowlat.tab = data.frame(table(lowlat.sharks$source_taxon_name))
 
-
+#Disclude rays/skates from diet dataset
+Low lats: "Rajiformes"&!="Dasyatis sabina"&!= "Aetobatus narinari" 
+Did not work: lowlat.allsharks = lowlat.elasmos[lowlat.elasmos$source_taxon_name != "Rajiformes" & "Dasyatis sabina" & "Aetobatis narinari"]
+#Need to use data set that includes only shark diet data in order create universe of 
+#random sampling
