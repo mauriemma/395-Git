@@ -22,6 +22,10 @@ library(taxize)
 classification(char.lowlatelasmos, db = 'itis')
 
 #Uploaded carcharhiniformes diet data from globi using CURL in bash
-curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv
+curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv"
 
-#Limit high and low lat sharks by species avg anatomical length
+#Finding freq of species occurring in dataset
+highlat.tab = data.frame(table(highlat.sharks$source_taxon_name))
+lowlat.tab = data.frame(table(lowlat.sharks$source_taxon_name))
+
+
