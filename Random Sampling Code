@@ -28,5 +28,6 @@ out.var = aggregate(out$NumberPreyTypes, by = list(out$ItemSampleSize), var)
 out.summary = cbind(out.mean, out.var$x^0.5)
 names(out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
+#Merging tables based on Number Prey Item 
 merge(table x, table y, by.x = column wanted, by.y = corresponding column, all.x=T, all.Y=T)
 
