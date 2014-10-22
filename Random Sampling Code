@@ -3,7 +3,8 @@ preyitems2 = preyitems[preyitems$Var1 != "", ]
 preyitems2 = preyitems2[order(preyitems2$Freq, decreasing = T), ]
 
 
-numitems = c(2, 10, 50, 100, 1000)
+
+numitems = c(10,50)
 
 numsamples = 1000
 
@@ -18,3 +19,13 @@ for (i in numitems) {
 }
 out = data.frame(output)
 names(out) = c('ItemSampleSize', 'NumberPreyTypes')
+
+#Calculate mean and standard deviation for the expected number of diet types
+#for a given sample size
+out.mean = aggregate(out$NumberPreyTypes, by = list(out$ItemSampleSize), mean)
+out.var = aggregate(out$NumberPreyTypes, by = list(out$ItemSampleSize), var)
+out.summary = cbind(out.mean, out.var$x^0.5)
+names(out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+merge(table x, table y, by.x = column wanted, by.y = corresponding column, all.x=T, all.Y=T)
+
