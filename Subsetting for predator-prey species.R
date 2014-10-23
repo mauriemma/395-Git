@@ -7,3 +7,5 @@ atlsharpnose = subset (groundsharks, source_taxon_name %in% predsp)
 
 #Getting prey list of prey data for indiv species
 preylist = yos[yos$Predator %in% predatorspecies, 'Prey.Species.Name']
+
+

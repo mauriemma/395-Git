@@ -48,3 +48,11 @@ lowlat.allsharks = lowlat.allsharks2[lowlat.allsharks2$source_taxon_name != "Aet
 library(taxize)
 classification(char.highlatelasmos, db = 'itis')
 
+highsharks.spp = c("Galeorhinus galeus", "Etmopterus spinax", "Mustelus californicus",
+    "Squalus acanthias", "Mustelus lunulatus", "Mustelus mustelus", "Somniosus microcephalus",
+    "Mustelus canis", "Scyliorhinus canicula", "Squalus")
+highlat.allsharks = subset (highlat.elasmos, source_taxon_name %in% highsharks.spp)
+
+
+
+
