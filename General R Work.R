@@ -53,6 +53,14 @@ highsharks.spp = c("Galeorhinus galeus", "Etmopterus spinax", "Mustelus californ
     "Mustelus canis", "Scyliorhinus canicula", "Squalus")
 highlat.allsharks = subset (highlat.elasmos, source_taxon_name %in% highsharks.spp)
 
+#All prey items for the 'universe' for random sampling:
+highlat.preyitems2 = data.frame(table(highlat.allsharks$target_taxon_name))
+highlat.preyitems3 = highlat.preyitems2[highlat.preyitems2$Var1 != "",]
+highlat.preyitems = highlat.preyitems3[highlat.preyitems3$Freq>0,]
+
+lowlat.preyitems2 = data.frame(table(lowlat.allsharks$target_taxon_name))
+lowlat.preyitems3 = lowlat.preyitems2[lowlat.preyitems2$Var1 != "",]
+lowlat.preyitems = lowlat.preyitems3[lowlat.preyitems3$Freq>0,]
 
 
 
