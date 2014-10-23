@@ -3,8 +3,7 @@ preyitems2 = preyitems[preyitems$Var1 != "", ]
 preyitems2 = preyitems2[order(preyitems2$Freq, decreasing = T), ]
 
 
-
-numitems = c(10,50)
+numitems = c(2:10)
 
 numsamples = 1000
 

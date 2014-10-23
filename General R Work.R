@@ -62,5 +62,16 @@ lowlat.preyitems2 = data.frame(table(lowlat.allsharks$target_taxon_name))
 lowlat.preyitems3 = lowlat.preyitems2[lowlat.preyitems2$Var1 != "",]
 lowlat.preyitems = lowlat.preyitems3[lowlat.preyitems3$Freq>0,]
 
+#Run random sampling for high lat shark prey items
+high.output = c()
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    high.dietsamp = sample(highlat.preyitems$Var1, i, prob = highlat.preyitems$Freq, replace = T)
+    high.samp.num.items = length(unique(high.dietsamp))
+    high.output = rbind(high.output, c(i, high.samp.num.items))
+  }
+}
+high.out = data.frame(high.output)
+names(high.out) = c('ItemSampleSize', 'NumberPreyItems')
 
 
