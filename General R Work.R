@@ -28,8 +28,23 @@ curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?in
 highlat.tab = data.frame(table(highlat.sharks$source_taxon_name))
 lowlat.tab = data.frame(table(lowlat.sharks$source_taxon_name))
 
-#Disclude rays/skates from diet dataset
-Low lats: "Rajiformes"&!="Dasyatis sabina"&!= "Aetobatus narinari" 
-Did not work: lowlat.allsharks = lowlat.elasmos[lowlat.elasmos$source_taxon_name != "Rajiformes" & "Dasyatis sabina" & "Aetobatis narinari"]
+#Disclude rays/skates from diet dataset (low lats)
+  #Low lats: "Rajiformes" "Dasyatis sabina" "Aetobatus narinari" 
+  #Did not work: lowlat.allsharks = lowlat.elasmos[lowlat.elasmos$source_taxon_name != "Rajiformes" & "Dasyatis sabina" & "Aetobatis narinari"]
+
 #Need to use data set that includes only shark diet data in order create universe of 
 #random sampling
+
+#Used this LONG method to exclude the rays in this dataset
+lowlat.allsharks3 = lowlat.elasmos[lowlat.elasmos$source_taxon_name != "Rajiformes", ]
+lowlat.allsharks2 = lowlat.allsharks3[lowlat.allsharks3$source_taxon_name != "Dasyatis sabina", ]
+lowlat.allsharks = lowlat.allsharks2[lowlat.allsharks2$source_taxon_name != "Aetobatus narinari", ]
+
+#Discluding rays/skates from diet dataset (high lats)
+    #Species to use: "Galeorhinus galeus", "Etmopterus spinax, "Mustelus californicus",
+    # "Squalus acanthias", "Mustelus lunulatus", "Mustelus mustelus" "Somniosus microcephalus"
+    # "Mustelus canis", "Scyliorhinus canicula", "Squalus"
+
+library(taxize)
+classification(char.highlatelasmos, db = 'itis')
+
