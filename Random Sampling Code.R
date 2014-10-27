@@ -22,10 +22,10 @@ names(out) = c('ItemSampleSize', 'NumberPreyTypes')
 #Calculate mean and standard deviation for the expected number of diet types
 #for a given sample size
 
-out.mean = aggregate(out$NumberPreyTypes, by = list(out$ItemSampleSize), mean)
-out.var = aggregate(out$NumberPreyTypes, by = list(out$ItemSampleSize), var)
-out.summary = cbind(out.mean, out.var$x^0.5)
-names(out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+high.out.mean = aggregate(high.out$NumberPreyTypes, by = list(high.out$ItemSampleSize), mean)
+high.out.var = aggregate(high.out$NumberPreyTypes, by = list(high.out$ItemSampleSize), var)
+high.out.summary = cbind(high.out.mean, high.out.var$x^0.5)
+names(high.out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
 #Merging tables based on Number Prey Item 
 merge(table x, table y, by.x = column wanted, by.y = corresponding column, all.x=T, all.Y=T)
