@@ -19,6 +19,25 @@ for (i in numitems) {
 out = data.frame(output)
 names(out) = c('ItemSampleSize', 'NumberPreyTypes')
 
+#Skeleton script for random sampling
+numitems = c(2:100)
+
+numsamples = 1000
+
+output = c()
+
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    dietsamp = sample(________.preyitems$Var1, i, prob = ________.preyitems$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
+  }
+}
+______.out = data.frame(output)
+names(____.out) = c('ItemSampleSize', 'NumberPreyTypes')
+
+
+
 #Calculate mean and standard deviation for the expected number of diet types
 #for a given sample size
 

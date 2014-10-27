@@ -72,12 +72,12 @@ output = c()
 
 for (i in numitems) {
   for (j in 1:numsamples) {
-    dietsamp = sample(________.preyitems$Var1, i, prob = ________.preyitems$Freq, replace = T)
+    dietsamp = sample(highlat.preyitems$Var1, i, prob = highlat.preyitems$Freq, replace = T)
     samp.num.items = length(unique(dietsamp))
     output = rbind(output, c(i, samp.num.items))
   }
 }
-______.out = data.frame(output)
-names(____.out) = c('ItemSampleSize', 'NumberPreyTypes')
+high.out = data.frame(output)
+names(high.out) = c('ItemSampleSize', 'NumberPreyTypes')
 
 
