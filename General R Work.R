@@ -106,7 +106,8 @@ names(--.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
 #High lat carcharhiniformes species specific  data
 #Need to learn how to subset all diet info by each species and by each individual
-  #For indivs use subset that calls for unique(highlat.allsharks$tmp_and_unique_source_specimen)
+  #For individuals use subset that calls for 
+    #unique(highlat.allsharks$tmp_and_unique_source_specimen)
 
 Did not work-> ggaleus.subset = subset(highlat.allsharks, source_taxon_name = 'Galeorhinus galeus')
  
