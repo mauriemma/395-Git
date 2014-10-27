@@ -30,8 +30,7 @@ lowlat.tab = data.frame(table(lowlat.sharks$source_taxon_name))
 
 #Disclude rays/skates from diet dataset (low lats)
   #Low lats: "Rajiformes" "Dasyatis sabina" "Aetobatus narinari" 
-  #Did not work: lowlat.allsharks = lowlat.elasmos[lowlat.elasmos$source_taxon_name != "Rajiformes" & "Dasyatis sabina" & "Aetobatis narinari"]
-
+  
 #Need to use data set that includes only shark diet data in order create universe of 
 #random sampling
 
@@ -57,10 +56,12 @@ highlat.allsharks = subset (highlat.elasmos, source_taxon_name %in% highsharks.s
 highlat.preyitems2 = data.frame(table(highlat.allsharks$target_taxon_name))
 highlat.preyitems3 = highlat.preyitems2[highlat.preyitems2$Var1 != "",]
 highlat.preyitems = highlat.preyitems3[highlat.preyitems3$Freq>0,]
+highlat.preyitems= highlat.preyitems[order(highlat.preyitems$Freq, decreasing = T), ]
 
 lowlat.preyitems2 = data.frame(table(lowlat.allsharks$target_taxon_name))
 lowlat.preyitems3 = lowlat.preyitems2[lowlat.preyitems2$Var1 != "",]
 lowlat.preyitems = lowlat.preyitems3[lowlat.preyitems3$Freq>0,]
+lowlat.preyitems= lowlat.preyitems[order(lowlat.preyitems$Freq, decreasing = T), ]
 
 #Run random sampling for high lat shark prey items
 high.output = c()
