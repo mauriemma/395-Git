@@ -22,7 +22,8 @@ library(taxize)
 classification(char.lowlatelasmos, db = 'itis')
 
 #Uploaded carcharhiniformes diet data from globi using CURL in bash
-curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv"
+curl "http://api.globalbioticinteractions.org/taxon/carcharhiniformes/preysOn?
+    includeObservations=true&type=csv&limit=100000'> carcharhiniformes.csv"
 
 #Finding freq of species occurring in dataset
 highlat.tab = data.frame(table(highlat.sharks$source_taxon_name))
@@ -102,3 +103,10 @@ names(low.out) = c('ItemSampleSize', 'NumberPreyTypes')
 --.var = aggregate(--$NumberPreyTypes, by = list(--$ItemSampleSize), var)
 --.summary = cbind(--mean, --var$x^0.5)
 names(--.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#High lat carcharhiniformes species specific  data
+#Need to learn how to subset all diet info by each species and by each individual
+  #For indivs use subset that calls for unique(highlat.allsharks$tmp_and_unique_source_specimen)
+
+Did not work-> ggaleus.subset = subset(highlat.allsharks, source_taxon_name = 'Galeorhinus galeus')
+ 
