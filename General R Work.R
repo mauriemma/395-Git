@@ -80,4 +80,25 @@ for (i in numitems) {
 high.out = data.frame(output)
 names(high.out) = c('ItemSampleSize', 'NumberPreyTypes')
 
+#Run random sampling for low lat shark prey
+numitems = c(2:100)
 
+numsamples = 1000
+
+output = c()
+
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    dietsamp = sample(lowlat.preyitems$Var1, i, prob = lowlat.preyitems$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
+  }
+}
+low.out = data.frame(output)
+names(low.out) = c('ItemSampleSize', 'NumberPreyTypes')
+
+#Data summarization
+--.mean = aggregate(--.$NumberPreyTypes, by = list(--$ItemSampleSize), mean)
+--.var = aggregate(--$NumberPreyTypes, by = list(--$ItemSampleSize), var)
+--.summary = cbind(--mean, --var$x^0.5)
+names(--.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
