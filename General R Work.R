@@ -64,15 +64,20 @@ lowlat.preyitems = lowlat.preyitems3[lowlat.preyitems3$Freq>0,]
 lowlat.preyitems= lowlat.preyitems[order(lowlat.preyitems$Freq, decreasing = T), ]
 
 #Run random sampling for high lat shark prey items
-high.output = c()
+numitems = c(2:100)
+
+numsamples = 1000
+
+output = c()
+
 for (i in numitems) {
   for (j in 1:numsamples) {
-    high.dietsamp = sample(highlat.preyitems$Var1, i, prob = highlat.preyitems$Freq, replace = T)
-    high.samp.num.items = length(unique(high.dietsamp))
-    high.output = rbind(high.output, c(i, high.samp.num.items))
+    dietsamp = sample(________.preyitems$Var1, i, prob = ________.preyitems$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
   }
 }
-high.out = data.frame(high.output)
-names(high.out) = c('ItemSampleSize', 'NumberPreyItems')
+______.out = data.frame(output)
+names(____.out) = c('ItemSampleSize', 'NumberPreyTypes')
 
 
