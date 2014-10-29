@@ -110,6 +110,24 @@ names(--.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
     #unique(highlat.allsharks$tmp_and_unique_source_specimen)
 
 #Subset for single species diet data 
-ggaleus = subset(highlat.allsharks, source_taxon_name == 'Galeorhinus galeus')
+  ggaleus = subset(highlat.allsharks, source_taxon_name == 'Galeorhinus galeus')
+  scanicula.preyitems = data.frame(table(scanicula$target_taxon_name))
+  scanicula.preyitems = scanicula.preyitems[scanicula.preyitems$Freq>0, ]
+  scanicula.preyitems = scanicula.preyitems[scanicula.preyitems$Var1 != "", ]
+  scanicula.preyitems = scanicula.preyitems[order(canicula.preyitems$Freq, decreasing = T), ]
 
-#Subset for single individual's diet data
+#All of the above may be unnecessary..
+
+#Subset for individual stomach diet data
+  #For a single individual:  
+df.names = ggaleus.df.names = c('Species','StomachID','NumPreyItems','NumPreyType')
+df2 = data.frame(unique(ggaleus.ind1$source_taxon_name), unique(ggaleus.ind1$tmp_and_unique_
+            source_specimen_id), length(ggaleus.ind1$source_taxon_name), 
+                length(unique(ggaleus.ind1$target_taxon_name)))
+
+  #For the entire species:
+df.ggal = data.frame(unique(ggaleus$source_taxon_name), 
+                     unique(ggaleus$tmp_and_unique_source_specimen_id),?????????
+                     #Next two parts will be num prey items total per indiv and then the num of unique
+                     #prey items from that group
+
