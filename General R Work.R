@@ -161,4 +161,5 @@ names(highlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 
 highlat.indivprey = highlat.indivprey[order(highlat.indivprey$NumPreyItems, decreasing = T), ]
 
-#High latitude sharks compared with random sample of all high lat prey
+#High latitude carcharhiniformes ('highlat.sharks') merged with random sampling of all high lat shark prey
+
