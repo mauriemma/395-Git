@@ -136,16 +136,26 @@ preytypes = aggregate(ggaleus$target_taxon_name, by = list(ggaleus$tmp_and_uniqu
                       function(x) length(unique(x)))
 
     #Can use this to do all at once:
-try.allindiv = data.frame(unique(ggaleus$source_taxon_name), table(ggaleus$tmp_and_unique_source_specimen_id),
+data.frame(unique(ggaleus$source_taxon_name), table(ggaleus$tmp_and_unique_source_specimen_id),
                           aggregate(ggaleus$target_taxon_name, by = list(ggaleus$tmp_and_unique_source_specimen_id), 
                                     function(x) length(unique(x))))
 
     #But better to just use merge after getting num prey types separately:
 ggaleus.indivprey= merge(ggaleus.indivnumprey,preytypes, by.x='StomachID', by.y= 'Group.1',all.x=T)
-names(ggaleus.indivprey)= c('PredSpecies', 'StomachID', 'NumPreyItems', 'NumPreyTypes')
+names(ggaleus.indivprey)= c('StomachID', 'PredatorSpecies', 'NumPreyItems', 'NumPreyTypes')
 
 #Finding total prey items and total prey types for all high latitude individuals:
-highlat.indivprey= data.frame(unique(highlat.allsharks$source_taxon_name),
-           table(ggaleus$tmp_and_unique_source_specimen_id)), 
+indivnumprey= data.frame(table(highlat.allsharks$tmp_and_unique_source_specimen_id))
+indivnumprey = indivnumprey[indivnumprey$Freq>1,] 
+                  #Because just 1 item = one prey type
 
+preytypes = aggregate(highlat.allsharks$target_taxon_name, 
+                      by = list(highlat.allsharks$tmp_and_unique_source_specimen_id), 
+                            function(x) length(unique(x)))
+preytypes = preytypes[preytypes$x>1, ]
+
+
+highlat.indivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+
+names(highlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 
