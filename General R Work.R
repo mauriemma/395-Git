@@ -124,10 +124,12 @@ df.names = ggaleus.df.names = c('Species','StomachID','NumPreyItems','NumPreyTyp
 df2 = data.frame(unique(ggaleus.ind1$source_taxon_name), unique(ggaleus.ind1$tmp_and_unique_
             source_specimen_id), length(ggaleus.ind1$source_taxon_name), 
                 length(unique(ggaleus.ind1$target_taxon_name)))
+      #This only makes sense for indivs that had equal num different prey and num items
 
   #For the entire species:
-df.ggal = data.frame(unique(ggaleus$source_taxon_name), 
-                     unique(ggaleus$tmp_and_unique_source_specimen_id),?????????
-                     #Next two parts will be num prey items total per indiv and then the num of unique
-                     #prey items from that group
-
+    #Number ofitems for each individual in one species:
+ggaleus.indivnumprey= data.frame(unique(ggaleus$source_taxon_name),
+                                 table(ggaleus$tmp_and_unique_source_specimen_id))
+names(ggaleus.indivnumprey)= c('PredSpecies', 'StomachID', 'NumPreyItems')
+    
+    #Need to find number of types for each indiv!!!! 
