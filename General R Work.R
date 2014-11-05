@@ -196,3 +196,8 @@ preytypes = aggregate(lowlat.sharks$target_taxon_name,
 lowlat.indivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
 names(lowlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 lowlat.indivprey = lowlat.indivprey[order(lowlat.indivprey$NumPreyItems, decreasing = T),]
+    #No variance????
+
+#By species: found that looking at whole species data gives better variance and representation
+# of total diet items by a species instead of each indiv
+          #Example: Carcharhinus sharks ate a total of 117 items but only 28 unique items
