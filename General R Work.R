@@ -157,7 +157,7 @@ highlat.indivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.
 
 names(highlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 
-highlat.indivprey = highlat.indivprey[order(highlat.indivprey$NumPreyItems, decreasing = T), ]
+highlat.indivprey = highlat.indivprey[order(highlat.indivprey$NumPreyItems, decreasing = T),]
 
 #High latitude carcharhiniformes data summary
 high.sharks.mean = aggregate(highlat.indivprey$NumPreyTypes,
@@ -169,3 +169,7 @@ high.sharks.var = aggregate(highlat.indivprey$NumPreyTypes,
 high.sharks.summary = cbind(high.sharks.mean, high.sharks.var$x^0.5)
 
 names(high.sharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Data comparison
+highlat.compare = merge(high.sharks.summary, high.out.summary, by.x= 'NumPreyItems', 
+                        by.y = 'ItemSampleSize', all.x=T, all.y=T)
