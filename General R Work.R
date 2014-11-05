@@ -144,7 +144,7 @@ data.frame(unique(ggaleus$source_taxon_name), table(ggaleus$tmp_and_unique_sourc
 ggaleus.indivprey= merge(ggaleus.indivnumprey,preytypes, by.x='StomachID', by.y= 'Group.1',all.x=T)
 names(ggaleus.indivprey)= c('StomachID', 'PredatorSpecies', 'NumPreyItems', 'NumPreyTypes')
 
-#Finding total prey items and total prey types for all high latitude individuals:
+#Finding total prey items and total prey types for all high latitude carcharhiniformes individuals:
 indivnumprey= data.frame(table(highlat.sharks$tmp_and_unique_source_specimen_id))
 indivnumprey = indivnumprey[indivnumprey$Freq>1,] 
                   #Because just 1 item = one prey type
@@ -152,8 +152,6 @@ indivnumprey = indivnumprey[indivnumprey$Freq>1,]
 preytypes = aggregate(highlat.sharks$target_taxon_name, 
                       by = list(highlat.sharks$tmp_and_unique_source_specimen_id), 
                             function(x) length(unique(x)))
-preytypes = preytypes[preytypes$x>1, ]
-
 
 highlat.indivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
 
@@ -161,5 +159,13 @@ names(highlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 
 highlat.indivprey = highlat.indivprey[order(highlat.indivprey$NumPreyItems, decreasing = T), ]
 
-#High latitude carcharhiniformes ('highlat.sharks') merged with random sampling of all high lat shark prey
+#High latitude carcharhiniformes data summary
+high.sharks.mean = aggregate(highlat.indivprey$NumPreyTypes,
+                             by = list(highlat.indivprey$NumPreyItems), mean)
+high.sharks.var = aggregate(highlat.indivprey$NumPreyTypes,
+                            by = list(highlat.indivprey$NumPreyItems), var)
+    #Returns 0 variance as 'NA' instead of 0.00000
 
+high.sharks.summary = cbind(high.sharks.mean, high.sharks.var$x^0.5)
+
+names(high.sharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
