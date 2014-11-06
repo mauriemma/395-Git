@@ -223,6 +223,32 @@ lowlat.preybysp = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1'
 lowlat.preybysp = lowlat.preybysp[lowlat.preybysp$Freq>1, ]
 names(lowlat.preybysp) = c('PredatorSpecies', 'NumPreyItems','NumPreyTypes')
 
+#New for loop for random sampling for more diet items
+numitems = c(2:500)
 
-                                                       
-   
+numsamples = 1000
+
+output = c()
+
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    dietsamp = sample(lowlat.preyitems$Var1, i, prob = lowlat.preyitems$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
+  }
+}
+low.out.byspec = data.frame(output)
+names(low.out.byspec) = c('ItemSampleSize', 'NumberPreyTypes')
+
+#Data summaries:
+lowspec.out.mean = aggregate(low.out.byspec$NumberPreyTypes, by = list(low.out.byspec$ItemSampleSize), mean)
+lowspec.out.var = aggregate(low.out.byspec$NumberPreyTypes, by = list(low.out.byspec$ItemSampleSize), var)
+lowspec.out.summary = cbind(lowspec.out.mean, lowspec.out.var$x^0.5)
+names(lowspec.out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Random vs actual:
+lowlat.compare.byspec = merge(lowlat.preybysp, lowspec.out.summary, by.x= 'NumPreyItems', 
+                        by.y = 'ItemSampleSize', all.x=T)
+
+
+
