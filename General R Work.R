@@ -172,8 +172,8 @@ names(high.sharks.summary) = c('Number.Prey.Items', 'MeanNumPreyTypes', 'SDNumPr
   
   #z-score
 high.sharks.summary['zScore']= (high.sharks.summary$NumPreyItems*
-                                  high.sharks.summary$MeanNumPreyItems)/
-                                      (high.sharks.summary$SDNumPreyTypes
+                                  high.sharks.summary$MeanNumPreyTypes)/
+                                      (high.sharks.summary$SDNumPreyTypes)
 
 #Data comparison
 highlat.compare = merge(high.sharks.summary, high.out.summary, by.x= 'NumPreyItems', 
@@ -192,6 +192,14 @@ indivnumprey= data.frame(table(lowlat.sharks$tmp_and_unique_source_specimen_id))
 preytypes = aggregate(lowlat.sharks$target_taxon_name, 
                       by = list(lowlat.sharks$tmp_and_unique_source_specimen_id), 
                       function(x) length(unique(x)))
+#Data summary:
+low.sharks.mean = aggregate(lowlat.indivprey$NumPreyTypes,
+                             by = list(lowlat.indivprey$NumPreyItems), mean)
+low.sharks.var = aggregate(lowlat.indivprey$NumPreyTypes,
+                            by = list(lowlat.indivprey$NumPreyItems), var)
+
+low.sharks.summary = cbind(low.sharks.mean,low.sharks.var$x^0.5)
+names(low.sharks.summary) = c('Number.Prey.Items', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
 lowlat.indivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
 names(lowlat.indivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
