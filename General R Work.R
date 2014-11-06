@@ -201,3 +201,28 @@ lowlat.indivprey = lowlat.indivprey[order(lowlat.indivprey$NumPreyItems, decreas
 #By species: found that looking at whole species data gives better variance and representation
 # of total diet items by a species instead of each indiv
           #Example: Carcharhinus sharks ate a total of 117 items but only 28 unique items
+
+      #Get prey types for each single species
+preytypes = aggregate(highlat.sharks$target_taxon_name, 
+                      +by = list(highlat.sharks$source_taxon_name), 
+                      +   function(x) length(unique(x)))
+
+      #Number of prey items within each species
+indivnumprey= data.frame(table(highlat.sharks$source_taxon_name))
+highlat.preybysp = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+highlat.preybysp = highlat.preybysp[highlat.preybysp$Freq>1, ]
+names(highlat.preybysp) = c('PredatorSpecies', 'NumPreyItems','NumPreyTypes')
+
+
+#Low latitude prey by species
+preytypes = aggregate(lowlat.sharks$target_taxon_name, 
+                      +by = list(lowlat.sharks$source_taxon_name), 
+                      +   function(x) length(unique(x))
+indivnumprey= data.frame(table(lowlat.sharks$source_taxon_name))
+lowlat.preybysp = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+lowlat.preybysp = lowlat.preybysp[lowlat.preybysp$Freq>1, ]
+names(lowlat.preybysp) = c('PredatorSpecies', 'NumPreyItems','NumPreyTypes')
+
+
+                                                       
+   
