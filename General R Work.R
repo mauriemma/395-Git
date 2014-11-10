@@ -9,8 +9,6 @@ elasmos = subset(elasmobranchs, select= c(1,3,4,5,9,10))
 lowlat.elasmos = subset(elasmos, latitude>=0&latitude<=30&longitude>=-115&longitude<=60)
 highlat.elasmos = subset(elasmos, latitude>30&longitude>=-115&longitude<=60)
 
-#Subsetting data for a single species:
-
 
 #Creating list of species and unique prey types
 preynames = c(as.character(WHATEVER LIST OR GROUP OF PREY))
@@ -270,7 +268,6 @@ preytypes = aggregate(highlat.allsharks$target_taxon_name,
 highlat.allindivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
 names(highlat.allindivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
 highlat.allindivprey = highlat.allindivprey[order(highlat.allindivprey$NumPreyItems, decreasing = T),]
-
     #Stats summaries:
 high.allsharks.mean = aggregate(highlat.allindivprey$NumPreyTypes,
                              by = list(highlat.allindivprey$NumPreyItems), mean)
@@ -278,5 +275,32 @@ high.allsharks.var = aggregate(highlat.allindivprey$NumPreyTypes,
                             by = list(highlat.allindivprey$NumPreyItems), var)
 high.allsharks.summary = cbind(high.allsharks.mean, high.allsharks.var$x^0.5)
 names(high.allsharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Diet items for ALL SHARK individuals in LOW lats:
+indivnumprey= data.frame(table(lowlat.allsharks$tmp_and_unique_source_specimen_id))
+indivnumprey = indivnumprey[indivnumprey$Freq>1,] 
+preytypes = aggregate(lowlat.allsharks$target_taxon_name, 
+                      by = list(lowlat.allsharks$tmp_and_unique_source_specimen_id), 
+                      function(x) length(unique(x)))
+lowlat.allindivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+names(lowlat.allindivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
+lowlat.allindivprey = lowlat.allindivprey[order(lowlat.allindivprey$NumPreyItems, decreasing = T),]
+    #Summaries
+low.allsharks.mean = aggregate(lowlat.allindivprey$NumPreyTypes,
+                                by = list(lowlat.allindivprey$NumPreyItems), mean)
+low.allsharks.var = aggregate(lowlat.allindivprey$NumPreyTypes,
+                               by = list(lowlat.allindivprey$NumPreyItems), var)
+low.allsharks.summary = cbind(low.allsharks.mean, low.allsharks.var$x^0.5)
+names(low.allsharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Data by species and individual
+high.all.tab = data.frame(table(highlat.allsharks$source_taxon_name, 
+                                highlat.allsharks$tmp_and_unique_source_specimen_id))
+high.all.tab = high.all.tab[high.all.tab$Freq>1, ]
+high.all.tab = high.all.tab[order(high.all.tab$Freq, decreasing = T),]
+high.all.tab = high.all.tab[order(high.all.tab$Var1, decreasing = F),]
+
+#Number prey items for each species in YOS data
+yos.spectotprey= data.frame(table(yos$Predator))
 
 
