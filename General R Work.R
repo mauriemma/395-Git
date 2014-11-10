@@ -168,7 +168,7 @@ high.sharks.var = aggregate(highlat.indivprey$NumPreyTypes,
 
 high.sharks.summary = cbind(high.sharks.mean, high.sharks.var$x^0.5)
 
-names(high.sharks.summary) = c('Number.Prey.Items', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+names(high.sharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
   
   #z-score
 high.sharks.summary['zScore']= (high.sharks.summary$NumPreyItems*
@@ -180,12 +180,6 @@ highlat.compare = merge(high.sharks.summary, high.out.summary, by.x= 'NumPreyIte
                         by.y = 'ItemSampleSize', all.x=T, all.y=T)
 
 #Low carcharhiniformes
-lowlat.4sharks = subset(lowlat.sharks, source_taxon_name == 'Rhizoprionodon terraenovae' | 
-                          source_taxon_name == 'Sphyrna tiburo' |
-                          source_taxon_name == 'Carcharhinus acronotus'|
-                          source_taxon_name == 'Carcharhinus perezii')
-
-
 indivnumprey= data.frame(table(lowlat.sharks$tmp_and_unique_source_specimen_id))
      #?necessary to do:  indivnumprey = indivnumprey[indivnumprey$Freq > 0), ]
 
@@ -258,5 +252,31 @@ names(lowspec.out.summary) = c('ItemSampleSize', 'MeanNumPreyTypes', 'SDNumPreyT
 lowlat.compare.byspec = merge(lowlat.preybysp, lowspec.out.summary, by.x= 'NumPreyItems', 
                         by.y = 'ItemSampleSize', all.x=T)
 
+#Diet items for ALL shark species in high latitudes:
+preytypes = aggregate(highlat.allsharks$target_taxon_name, 
+                      +by = list(highlat.allsharks$source_taxon_name), 
+                      +   function(x) length(unique(x)))
+indivnumprey= data.frame(table(highlat.allsharks$source_taxon_name))
+highlat.allpreybysp = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+highlat.allpreybysp = highlat.allpreybysp[highlat.allpreybysp$Freq>1, ]
+names(highlat.allpreybysp) = c('PredatorSpecies', 'NumPreyItems','NumPreyTypes')
+
+#Diet items for ALL shark individuals in high lats:
+indivnumprey= data.frame(table(highlat.allsharks$tmp_and_unique_source_specimen_id))
+indivnumprey = indivnumprey[indivnumprey$Freq>1,] 
+preytypes = aggregate(highlat.allsharks$target_taxon_name, 
+                      by = list(highlat.allsharks$tmp_and_unique_source_specimen_id), 
+                      function(x) length(unique(x)))
+highlat.allindivprey = merge(indivnumprey, preytypes, by.x = 'Var1', by.y = 'Group.1', all.x=T)
+names(highlat.allindivprey)= c('StomachID', 'NumPreyItems', 'NumPreyTypes')
+highlat.allindivprey = highlat.allindivprey[order(highlat.allindivprey$NumPreyItems, decreasing = T),]
+
+    #Stats summaries:
+high.allsharks.mean = aggregate(highlat.allindivprey$NumPreyTypes,
+                             by = list(highlat.allindivprey$NumPreyItems), mean)
+high.allsharks.var = aggregate(highlat.allindivprey$NumPreyTypes,
+                            by = list(highlat.allindivprey$NumPreyItems), var)
+high.allsharks.summary = cbind(high.allsharks.mean, high.allsharks.var$x^0.5)
+names(high.allsharks.summary) = c('NumPreyItems', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
 
