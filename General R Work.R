@@ -303,10 +303,13 @@ high.all.tab = high.all.tab[order(high.all.tab$Var1, decreasing = F),]
 #Number prey items for each species in YOS data
 yos.spectotprey= data.frame(table(yos$Predator))
 
-#Freq occurence of each prey type in each species
+#Freq occurrence of each prey type in each species
 
 --.preyfreq = aggregate(--$tmp_and_unique_source_specimen_id, by = list(--$target_taxon_name),
                               function(x) length(unique(x)))
 
-names(--.preyfreq) = c('PreySpecies','FrequencyOccurence')
+names(--.preyfreq) = c('PreySpecies','FrequencyOccurrence')
 
+#Add PercentOccurrence
+--.preyfreq["PercentOccurrence"] = (--.preyfreq$FrequencyOccurrence)/
+            (sum(--.preyfreq$FrequencyOccurrence))*100
