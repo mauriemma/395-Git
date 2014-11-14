@@ -313,3 +313,21 @@ names(--.preyfreq) = c('PreySpecies','FrequencyOccurrence')
 #Add PercentOccurrence
 --.preyfreq["PercentOccurrence"] = (--.preyfreq$FrequencyOccurrence)/
             (sum(--.preyfreq$FrequencyOccurrence))*100
+
+#For loop for similarity comparison
+    #Bull shark:
+
+output = c()
+species = c('C.leucas','C.limbatus','S.tiburo','C.isodon')
+
+for (species[1] in (species[1:3]) {
+  for (species[2] in ((species[1]+1):4) {
+    for (i = 1:100) {
+      cleucas = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
+      cleucas.stomachs = unique(C.leucas$tmp_and_unique_source_specimen_id)
+      cleucas.stom.samp = sample(cleucas.stomachs, 13)
+      cleucas.prey.samp = c.leucas$target_taxon_name[cleucas$tmp_and_unique_source_specimen_id %in% cleucas.stom.samp]
+      jaccard =     
+    }
+  }
+}
