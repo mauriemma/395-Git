@@ -300,8 +300,6 @@ high.all.tab = high.all.tab[high.all.tab$Freq>1, ]
 high.all.tab = high.all.tab[order(high.all.tab$Freq, decreasing = T),]
 high.all.tab = high.all.tab[order(high.all.tab$Var1, decreasing = F),]
 
-#Number prey items for each species in YOS data
-yos.spectotprey= data.frame(table(yos$Predator))
 
 #Freq occurrence of each prey type in each species
 
@@ -314,20 +312,41 @@ names(--.preyfreq) = c('PreySpecies','FrequencyOccurrence')
 --.preyfreq["PercentOccurrence"] = (--.preyfreq$FrequencyOccurrence)/
             (sum(--.preyfreq$FrequencyOccurrence))*100
 
+#Row bind of all shark data being used
+sharks.total = rbind(blacktip, finetooth, bullshark, bonnethead)
+
 #For loop for similarity comparison
     #Bull shark:
 
 output = c()
 species = c('C.leucas','C.limbatus','S.tiburo','C.isodon')
 
-for (species[1] in (species[1:3]) {
-  for (species[2] in ((species[1]+1):4) {
-    for (i = 1:100) {
+for (species1 in (species[1:3])) {
+  for (species2 in ((species[1]+1):4)) {
+    for (i in 1:100) {
       cleucas = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
-      cleucas.stomachs = unique(C.leucas$tmp_and_unique_source_specimen_id)
+      cleucas.stomachs = unique(cleucas$tmp_and_unique_source_specimen_id)
       cleucas.stom.samp = sample(cleucas.stomachs, 13)
-      cleucas.prey.samp = c.leucas$target_taxon_name[cleucas$tmp_and_unique_source_specimen_id %in% cleucas.stom.samp]
-      jaccard =     
+      cleucas.prey.samp = cleucas$target_taxon_name[cleucas$tmp_and_unique_source_specimen_id %in% cleucas.stom.samp]
+      total.spp = length(unique(sharks.total$target_taxon_name))
+      sp1 = unique(cleucas$target_taxon_name)
+      sp2 = unique(species[2]$target_taxon_name)
+      sp2.samp = sample(sp2, 15, replace = F)
+      unique.spp = sum(sapply(sp1, function(x) sum((sp2.samp==x))))
+      jaccard = unique.spp/total.spp
+      output = rbind(output, c(species1, species2, jaccard))
     }
   }
 }
+
+#Practice Jaccard with C.leucas and C.limbatus data worked
+sp1 = unique(cleucas$target_taxon_name)
+sp2 = unique(climbatus$target_taxon_name))
+    #sp1 only has 15, so to get equal sample sized, take sample of larger group
+sp2.samp = sample(sp2, 15, replace = F)
+        #Replace = FALSE because you don't want to put that item back in 
+sapply(sp1, function(x) (sp2.samp == x))
+    #Gives you the matrix where shared diet items = TRUE
+sum(sapply(sp1, function(x) sum((sp2.samp == x))))
+    #Gives the total number of shared diet items
+
