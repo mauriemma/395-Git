@@ -350,3 +350,24 @@ sapply(sp1, function(x) (sp2.samp == x))
 sum(sapply(sp1, function(x) sum((sp2.samp == x))))
     #Gives the total number of shared diet items
 
+
+#Construction prey curves...(not correct)
+blacktip.preyitems = data.frame(table(blacktip$target_taxon_name))
+blacktip.preyitems = blacktip.preyitems[blacktip.preyitems$Freq > 0,]                    
+
+numitems = c(2:97)
+numsamples = 1000
+output = c()
+
+for (i in numitems) {
+  for (j in 1:numsamples) {
+    dietsamp = sample(blacktip.preyitems$Var1, i, prob = blacktip.preyitems$Freq, replace = T)
+    samp.num.items = length(unique(dietsamp))
+    output = rbind(output, c(i, samp.num.items))
+  }
+}
+blacktip.preycurve = data.frame(output)
+names(blacktip.preycurve) = c('NumberStomachs', 'NumberPreyTypes')
+
+
+
