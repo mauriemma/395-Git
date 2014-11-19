@@ -375,9 +375,6 @@ bull.out.mean = aggregate(bull.out$NumberPreyTypes, by = list(bull.out$NumberSto
 bull.out.var = aggregate(bull.out$NumberPreyTypes, by = list(bull.out$NumberStomachs), var)
 bull.out.summary = cbind(bull.out.mean, bull.out.var$x^0.5)
 names(bull.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
-plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
-     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bull Shark", 
-     pch = 20, type ="o")
 
 #Prey curves by stomach for Bonnethead:
   
@@ -401,9 +398,6 @@ bonnethead.out.mean = aggregate(bonnethead.out$NumberPreyTypes, by = list(bonnet
 bonnethead.out.var = aggregate(bonnethead.out$NumberPreyTypes, by = list(bonnethead.out$NumberStomachs), var)
 bonnethead.out.summary = cbind(bonnethead.out.mean, bonnethead.out.var$x^0.5)
 names(bonnethead.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
-plot(bonnethead.out.mean$Group.1, bonnethead.out.mean$x, xlim = c(0,25), ylim = c(0,15), 
-     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bonnethead Shark", 
-     pch = 20, type ="o")
 
 #Prey curves by stomach for Blacktip:
 
@@ -427,12 +421,78 @@ blacktip.out.mean = aggregate(blacktip.out$NumberPreyTypes, by = list(blacktip.o
 blacktip.out.var = aggregate(blacktip.out$NumberPreyTypes, by = list(blacktip.out$NumberStomachs), var)
 blacktip.out.summary = cbind(blacktip.out.mean, blacktip.out.var$x^0.5)
 names(blacktip.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Prey curve for finetooth
+numstomachs = 2:25
+numsamples = 100
+output = c()
+
+for (i in numstomachs) {
+  for (j in 1:numsamples) {
+    finetooth.stomachs = unique(finetooth$tmp_and_unique_source_specimen_id)
+    finetooth.preyfromstomach = finetooth$target_taxon_name[finetooth$tmp_and_unique_source_specimen_id %in% finetooth.stomachs]
+    finetooth.prey.samp = sample(finetooth.preyfromstomach, i, replace = T)
+    finetooth.samp.numprey = length(unique(finetooth.prey.samp))
+    output = rbind(output, c(i, finetooth.samp.numprey))
+  }
+}
+finetooth.out = data.frame(output)
+names(finetooth.out) = c('NumberStomachs', 'NumberPreyTypes')
+
+finetooth.out.mean = aggregate(finetooth.out$NumberPreyTypes, by = list(finetooth.out$NumberStomachs), mean)
+finetooth.out.var = aggregate(finetooth.out$NumberPreyTypes, by = list(finetooth.out$NumberStomachs), var)
+finetooth.out.summary = cbind(finetooth.out.mean, finetooth.out.var$x^0.5)
+names(finetooth.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+
+#Plotting the curves
+plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bull Shark", 
+     pch = 20, type ="o")
+
+plot(bonnethead.out.mean$Group.1, bonnethead.out.mean$x, xlim = c(0,25), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bonnethead Shark", 
+     pch = 20, type ="o")
+
 plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), 
      xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Blacktip Shark", 
      pch = 20, type ="o")
 
-#Plotting all curves onto one graph with scale of blacktip
-par(new = TRUE)
-plot(blacktip.out.mean$Group.1, bonnethead.out.mean$x, ylim = range(c(blacktip.out.mean$x)), 
-     axes = F, xlab = "Number of Stomachs", ylab = "Number of Prey Types")
+plot(finetooth.out.mean$Group.1, finetooth.out.mean$x, xlim = c(0,30), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Finetooth Shark", 
+     pch = 20, type ="o")
 
+#Plotting all curves onto one graph
+  #Colors
+plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Cumulative Prey Curves", pch = 1, col = "Red")
+points(bonnethead.out.mean$Group.1,bonnethead.out.mean$x, pch = 1, col = "Blue")
+points(bull.out.mean$Group.1, bull.out.mean$x, col = "Green")
+points(finetooth.out.mean$Group.1, finetooth.out.mean$x, col = "Orange")
+legend(70,15, legend = "Blacktip", pch=1, col="red", bty = "n")
+legend(70,12, legend = "Bonnethead", pch=1, col="blue",bty = "n")
+legend(70,9, legend = "Bull", pch=1, col = "green",bty = "n")
+legend(70,6, legend = "Finetooth", pch=1, col = "orange", bty = "n")
+
+  #Shapes
+plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Cumulative Prey Curves", pch = 0)
+points(bonnethead.out.mean$Group.1,bonnethead.out.mean$x, pch = 2)
+points(bull.out.mean$Group.1, bull.out.mean$x, pch = 1)
+points(finetooth.out.mean$Group.1, finetooth.out.mean$x, pch = 5)
+legend(70,15, legend = "Blacktip", pch=0, bty = "n")
+legend(70,12, legend = "Bonnethead", pch=2,bty = "n")
+legend(70,9, legend = "Bull", pch=1, bty = "n")
+legend(70,6, legend = "Finetooth", pch=5, bty = "n")
+
+#Make a figure with all curves included
+par(mfrow=c(2,2))
+plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
+     xlab = "",ylab = "Number of Prey Types", main = "Bull Shark", 
+     pch = 20, type ="o")
+plot(bonnethead.out.mean$Group.1, bonnethead.out.mean$x, xlim = c(0,25), ylim = c(0,15), 
+     xlab = "",ylab = "", main = "Bonnethead Shark", 
+     pch = 20, type ="o")
+plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Blacktip Shark", 
+     pch = 20, type ="o")
+plot(finetooth.out.mean$Group.1, finetooth.out.mean$x, xlim = c(0,30), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "", main = "Finetooth Shark", 
+     pch = 20, type ="o")
