@@ -324,10 +324,9 @@ species = c('C.leucas','C.limbatus','S.tiburo','C.isodon')
 for (species1 in (species[1:3])) {
   for (species2 in ((species[1]+1):4)) {
     for (i in 1:100) {
-      cleucas = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
-      cleucas.stomachs = unique(cleucas$tmp_and_unique_source_specimen_id)
-      cleucas.stom.samp = sample(cleucas.stomachs, 13)
-      cleucas.prey.samp = cleucas$target_taxon_name[cleucas$tmp_and_unique_source_specimen_id %in% cleucas.stom.samp]
+      bullshark = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
+      bull.stomachs = unique(bullshark$tmp_and_unique_source_specimen_id)
+      bull.prey.samp = bullshark$target_taxon_name[bullshark$tmp_and_unique_source_specimen_id %in% bull.stomachs]
       total.spp = length(unique(sharks.total$target_taxon_name))
       sp1 = unique(cleucas$target_taxon_name)
       sp2 = unique(species[2]$target_taxon_name)
@@ -350,24 +349,24 @@ sapply(sp1, function(x) (sp2.samp == x))
 sum(sapply(sp1, function(x) sum((sp2.samp == x))))
     #Gives the total number of shared diet items
 
+#Random stomach prey items
+preyfromrandomstomachs = length(unique(blacktip$prey[blacktip$STomachID %in% randstomchIDs]))
 
-#Construction prey curves...(not correct)
-blacktip.preyitems = data.frame(table(blacktip$target_taxon_name))
-blacktip.preyitems = blacktip.preyitems[blacktip.preyitems$Freq > 0,]                    
+#Prey curves by stomach for BULL SHARK:
 
-numitems = c(2:97)
-numsamples = 1000
+numstomachs = 2:13
+numsamples = 100
 output = c()
 
-for (i in numitems) {
+for (i in numstomachs) {
   for (j in 1:numsamples) {
-    dietsamp = sample(blacktip.preyitems$Var1, i, prob = blacktip.preyitems$Freq, replace = T)
-    samp.num.items = length(unique(dietsamp))
-    output = rbind(output, c(i, samp.num.items))
+    bullshark = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
+    bull.stomachs = unique(bullshark$tmp_and_unique_source_specimen_id)
+    bull.preyfromstomach = bullshark$target_taxon_name[bullshark$tmp_and_unique_source_specimen_id %in% bull.stomachs]
+    bull.prey.samp = sample(bull.preyfromstomach, i, replace = T)
+    bull.samp.numprey = length(unique(bull.prey.samp))
+    output = rbind(output, c(i, bull.samp.numprey))
   }
 }
-blacktip.preycurve = data.frame(output)
-names(blacktip.preycurve) = c('NumberStomachs', 'NumberPreyTypes')
-
-
-
+bull.out = data.frame(output)
+names(bull.out) = c('NumberStomachs', 'NumberPreyTypes')
