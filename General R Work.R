@@ -444,7 +444,7 @@ finetooth.out.var = aggregate(finetooth.out$NumberPreyTypes, by = list(finetooth
 finetooth.out.summary = cbind(finetooth.out.mean, finetooth.out.var$x^0.5)
 names(finetooth.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
-#Plotting the curves
+#Plotting the mean curves
 plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
      xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bull Shark", 
      pch = 20, type ="o")
@@ -453,9 +453,7 @@ plot(bonnethead.out.mean$Group.1, bonnethead.out.mean$x, xlim = c(0,25), ylim = 
      xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bonnethead Shark", 
      pch = 20, type ="o")
 
-plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), 
-     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Blacktip Shark", 
-     pch = 20, type ="o")
+plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Blacktip Shark", pch = 20, type ="o")
 
 plot(finetooth.out.mean$Group.1, finetooth.out.mean$x, xlim = c(0,30), ylim = c(0,15), 
      xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Finetooth Shark", 
