@@ -370,3 +370,69 @@ for (i in numstomachs) {
 }
 bull.out = data.frame(output)
 names(bull.out) = c('NumberStomachs', 'NumberPreyTypes')
+
+bull.out.mean = aggregate(bull.out$NumberPreyTypes, by = list(bull.out$NumberStomachs), mean)
+bull.out.var = aggregate(bull.out$NumberPreyTypes, by = list(bull.out$NumberStomachs), var)
+bull.out.summary = cbind(bull.out.mean, bull.out.var$x^0.5)
+names(bull.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bull Shark", 
+     pch = 20, type ="o")
+
+#Prey curves by stomach for Bonnethead:
+  
+numstomachs = 2:19
+numsamples = 100
+output = c()
+
+for (i in numstomachs) {
+  for (j in 1:numsamples) {
+    bonnethead.stomachs = unique(bonnethead$tmp_and_unique_source_specimen_id)
+    bonnethead.preyfromstomach = bonnethead$target_taxon_name[bonnethead$tmp_and_unique_source_specimen_id %in% bonnethead.stomachs]
+    bonnethead.prey.samp = sample(bonnethead.preyfromstomach, i, replace = T)
+    bonnethead.samp.numprey = length(unique(bonnethead.prey.samp))
+    output = rbind(output, c(i, bonnethead.samp.numprey))
+  }
+}
+bonnethead.out = data.frame(output)
+names(bonnethead.out) = c('NumberStomachs', 'NumberPreyTypes')
+
+bonnethead.out.mean = aggregate(bonnethead.out$NumberPreyTypes, by = list(bonnethead.out$NumberStomachs), mean)
+bonnethead.out.var = aggregate(bonnethead.out$NumberPreyTypes, by = list(bonnethead.out$NumberStomachs), var)
+bonnethead.out.summary = cbind(bonnethead.out.mean, bonnethead.out.var$x^0.5)
+names(bonnethead.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+plot(bonnethead.out.mean$Group.1, bonnethead.out.mean$x, xlim = c(0,25), ylim = c(0,15), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Bonnethead Shark", 
+     pch = 20, type ="o")
+
+#Prey curves by stomach for Blacktip:
+
+numstomachs = 2:97
+numsamples = 100
+output = c()
+
+for (i in numstomachs) {
+  for (j in 1:numsamples) {
+    blacktip.stomachs = unique(blacktip$tmp_and_unique_source_specimen_id)
+    blacktip.preyfromstomach = blacktip$target_taxon_name[blacktip$tmp_and_unique_source_specimen_id %in% blacktip.stomachs]
+    blacktip.prey.samp = sample(blacktip.preyfromstomach, i, replace = T)
+    blacktip.samp.numprey = length(unique(blacktip.prey.samp))
+    output = rbind(output, c(i, blacktip.samp.numprey))
+  }
+}
+blacktip.out = data.frame(output)
+names(blacktip.out) = c('NumberStomachs', 'NumberPreyTypes')
+
+blacktip.out.mean = aggregate(blacktip.out$NumberPreyTypes, by = list(blacktip.out$NumberStomachs), mean)
+blacktip.out.var = aggregate(blacktip.out$NumberPreyTypes, by = list(blacktip.out$NumberStomachs), var)
+blacktip.out.summary = cbind(blacktip.out.mean, blacktip.out.var$x^0.5)
+names(blacktip.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
+plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), 
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Blacktip Shark", 
+     pch = 20, type ="o")
+
+#Plotting all curves onto one graph with scale of blacktip
+par(new = TRUE)
+plot(blacktip.out.mean$Group.1, bonnethead.out.mean$x, ylim = range(c(blacktip.out.mean$x)), 
+     axes = F, xlab = "Number of Stomachs", ylab = "Number of Prey Types")
+
