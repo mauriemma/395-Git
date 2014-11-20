@@ -315,42 +315,6 @@ names(--.preyfreq) = c('PreySpecies','FrequencyOccurrence')
 #Row bind of all shark data being used
 sharks.total = rbind(blacktip, finetooth, bullshark, bonnethead)
 
-#For loop for similarity comparison
-    #Bull shark:
-
-output = c()
-species = c('C.leucas','C.limbatus','S.tiburo','C.isodon')
-
-for (species1 in (species[1:3])) {
-  for (species2 in ((species[1]+1):4)) {
-    for (i in 1:100) {
-      bullshark = subset(sharks.total, source_taxon_name =='Carcharhinus leucas')
-      bull.stomachs = unique(bullshark$tmp_and_unique_source_specimen_id)
-      bull.prey.samp = bullshark$target_taxon_name[bullshark$tmp_and_unique_source_specimen_id %in% bull.stomachs]
-      total.spp = length(unique(sharks.total$target_taxon_name))
-      sp1 = unique(cleucas$target_taxon_name)
-      sp2 = unique(species[2]$target_taxon_name)
-      sp2.samp = sample(sp2, 15, replace = F)
-      unique.spp = sum(sapply(sp1, function(x) sum((sp2.samp==x))))
-      jaccard = unique.spp/total.spp
-      output = rbind(output, c(species1, species2, jaccard))
-    }
-  }
-}
-
-#Practice Jaccard with C.leucas and C.limbatus data worked
-sp1 = unique(cleucas$target_taxon_name)
-sp2 = unique(climbatus$target_taxon_name))
-    #sp1 only has 15, so to get equal sample sized, take sample of larger group
-sp2.samp = sample(sp2, 15, replace = F)
-        #Replace = FALSE because you don't want to put that item back in 
-sapply(sp1, function(x) (sp2.samp == x))
-    #Gives you the matrix where shared diet items = TRUE
-sum(sapply(sp1, function(x) sum((sp2.samp == x))))
-    #Gives the total number of shared diet items
-
-#Random stomach prey items
-preyfromrandomstomachs = length(unique(blacktip$prey[blacktip$STomachID %in% randstomchIDs]))
 
 #Prey curves by stomach for BULL SHARK:
 
@@ -506,3 +470,8 @@ legend(0,10, legend = "Blacktip", pch=15, bty="n")
 legend(0,9, legend = "Bonnethead", pch=17, bty="n")
 legend(0,8, legend = "Bull", pch=16, bty="n")
 legend(0,7, legend = "Finetooth", pch=18, bty="n")
+
+#Error bars
+arrows(bull.out.mean$Group.1, bull.out.mean$x, bull.out.mean$Group.1, bull.out.mean$x + bull.out.summary$SDNumPreyTypes, length = 0.1, angle = 90)
+arrows(bull.out.mean$Group.1, bull.out.mean$x, bull.out.mean$Group.1, bull.out.mean$x - bull.out.summary$SDNumPreyTypes, length = 0.1, angle = 90)
+arrows(bonnethead.out.mean$Group.)
