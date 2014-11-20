@@ -1,6 +1,6 @@
 # For loop for similarity comparison
 
-output = c()
+jaccard.output = c()
 species = c('Carcharhinus leucas','Carcharhinus limbatus','Sphyrna tiburo','Carcharhinus isodon')
 numstomachs = 13
 
@@ -20,7 +20,16 @@ for (species1 in 1:3) {
       shared.spp = sum(sapply(sp1, function(x) sum((sp2==x))))
       total.spp = length(unique(c(sp1, sp2)))
       jaccard = shared.spp/total.spp
-      output = rbind(output, c(species[species1], species[species2], jaccard))
+      jaccard.output = rbind(jaccard.output, c(species[species1], species[species2], jaccard))
     }
   }
 }
+jaccard.out = data.frame(jaccard.output)
+names(jaccard.out) = c('Sp1','Sp2','Similarity')
+jaccard.out['Similarity']= as.numeric(as.character(jaccard.out$Similarity))
+
+#Summary
+jaccard.mean = aggregate(jaccard.out$Similarity, by = list(Sp1= jaccard.out$Sp1, Sp2=jaccard.out$Sp2), mean)
+
+#Table for Jaccard Similarity
+
