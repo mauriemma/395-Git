@@ -465,20 +465,20 @@ plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0
 points(bonnethead.out.mean$Group.1,bonnethead.out.mean$x, pch = 1, col = "Blue")
 points(bull.out.mean$Group.1, bull.out.mean$x, col = "Green")
 points(finetooth.out.mean$Group.1, finetooth.out.mean$x, col = "Orange")
-legend(70,15, legend = "Blacktip", pch=1, col="red", bty = "n")
-legend(70,12, legend = "Bonnethead", pch=1, col="blue",bty = "n")
-legend(70,9, legend = "Bull", pch=1, col = "green",bty = "n")
-legend(70,6, legend = "Finetooth", pch=1, col = "orange", bty = "n")
+legend(65,11, legend = "Blacktip", pch=1, col="red", bty = "n")
+legend(65,9, legend = "Bonnethead", pch=1, col="blue",bty = "n")
+legend(65,6, legend = "Bull", pch=1, col = "green",bty = "n")
+legend(65,3, legend = "Finetooth", pch=1, col = "orange", bty = "n")
 
   #Shapes
 plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0,30), xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Cumulative Prey Curves", pch = 0)
 points(bonnethead.out.mean$Group.1,bonnethead.out.mean$x, pch = 2)
 points(bull.out.mean$Group.1, bull.out.mean$x, pch = 1)
 points(finetooth.out.mean$Group.1, finetooth.out.mean$x, pch = 5)
-legend(70,15, legend = "Blacktip", pch=0, bty = "n")
-legend(70,12, legend = "Bonnethead", pch=2,bty = "n")
-legend(70,9, legend = "Bull", pch=1, bty = "n")
-legend(70,6, legend = "Finetooth", pch=5, bty = "n")
+legend(65,11, legend = "Blacktip", pch=0, bty = "n")
+legend(65,9, legend = "Bonnethead", pch=2,bty = "n")
+legend(65,6, legend = "Bull", pch=1, bty = "n")
+legend(65,3, legend = "Finetooth", pch=5, bty = "n")
 
 #Make a figure with all curves included
 par(mfrow=c(2,2))
@@ -494,3 +494,9 @@ plot(blacktip.out.mean$Group.1, blacktip.out.mean$x, xlim = c(0,110), ylim = c(0
 plot(finetooth.out.mean$Group.1, finetooth.out.mean$x, xlim = c(0,30), ylim = c(0,15), 
      xlab = "Number of Stomachs",ylab = "", main = "Finetooth Shark", 
      pch = 20, type ="o")
+
+#Equal sample size curves (13)
+numstomachs = 2:13
+numsamples = 100
+output = c()
+
