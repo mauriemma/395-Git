@@ -24,22 +24,3 @@ for (species1 in 1:3) {
     }
   }
 }
-
-### For loop for similarity comparison
-
-output = c()
-species = c('Carcharhinus leucas','Carcharhinus limbatus','Sphyrna tiburo','Charcharhinus isodon')
-numstomachs = 13
-
-
-
-#Practice Jaccard with C.leucas and C.limbatus data worked
-sp1 = unique(as.character(cleucas$target_taxon_name))
-sp2 = unique(as.character(climbatus$target_taxon_name))
-#sp1 only has 15, so to get equal sample sized, take sample of larger group
-sp2.samp = sample(sp2, 15, replace = F)
-#Replace = FALSE because you don't want to put that item back in 
-sapply(sp1, function(x) (sp2.samp == x))
-#Gives you the matrix where shared diet items = TRUE
-sum(sapply(sp1, function(x) sum((sp2.samp == x))))
-#Gives the total number of shared diet items
