@@ -1,7 +1,5 @@
-#Random stomach prey items
-preyfromrandomstomachs = length(unique(blacktip$prey[blacktip$STomachID %in% randstomchIDs]))
-
 #Generic function for calculating prey curves by stomach 
+speciesname = "Whatever species want data from"
 
 expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
   sharksp = subset(dietdata, source_taxon_name == speciesname)
