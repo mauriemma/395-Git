@@ -480,7 +480,7 @@ legend(65,9, legend = "Bonnethead", pch=2,bty = "n")
 legend(65,6, legend = "Bull", pch=1, bty = "n")
 legend(65,3, legend = "Finetooth", pch=5, bty = "n")
 
-#Make a figure with all curves included
+#Make a figure with all plots included
 par(mfrow=c(2,2))
 plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,20), ylim = c(0,15), 
      xlab = "",ylab = "Number of Prey Types", main = "Bull Shark", 
@@ -495,8 +495,14 @@ plot(finetooth.out.mean$Group.1, finetooth.out.mean$x, xlim = c(0,30), ylim = c(
      xlab = "Number of Stomachs",ylab = "", main = "Finetooth Shark", 
      pch = 20, type ="o")
 
-#Equal sample size curves (13)
-numstomachs = 2:13
-numsamples = 100
-output = c()
-
+#Equal sample size curve plots (13 random stomachs)
+plot(bull.out.mean$Group.1, bull.out.mean$x, xlim = c(0,15), ylim = c(0,10),
+     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", 
+     pch =16 , type ="o")
+points(blacktip.out.even.mean$Group.1, blacktip.out.even.mean$x, pch=15, type = "o")
+points(bonnethead.out.even.mean$Group.1, bonnethead.out.even.mean$x, pch=17, type="o")
+points(finetooth.out.mean$Group.1, finetooth.out.mean$x, pch=18, type="o")
+legend(0,10, legend = "Blacktip", pch=15, bty="n")
+legend(0,9, legend = "Bonnethead", pch=17, bty="n")
+legend(0,8, legend = "Bull", pch=16, bty="n")
+legend(0,7, legend = "Finetooth", pch=18, bty="n")
