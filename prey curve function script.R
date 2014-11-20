@@ -1,5 +1,5 @@
 #Generic function for calculating prey curves by stomach 
-speciesname = "Whatever species want data from"
+---.new = expected.preyitems('Species name', sharks.total)
 
 expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
   sharksp = subset(dietdata, source_taxon_name == speciesname)
@@ -30,3 +30,26 @@ prey.rarefaction = function(shark.out) {
   return(shark.out.summary)
 }
 
+
+#For random sample of 13 stomachs, to plot together
+
+expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
+  sharksp = subset(dietdata, source_taxon_name == speciesname)
+  shark.stomachs = unique(sharksp$tmp_and_unique_source_specimen_id)
+  
+  numstomachs = 2:13
+  output = c()
+  
+  for (i in numstomachs) {
+    for (j in 1:numsamples) {
+      shark.preyfromstomach = sharksp$target_taxon_name[sharksp$tmp_and_unique_source_specimen_id %in% shark.stomachs]
+      shark.prey.samp = sample(shark.preyfromstomach, i, replace = T)
+      shark.samp.numprey = length(unique(shark.prey.samp))
+      output = rbind(output, c(speciesname, i, shark.samp.numprey))
+    }
+  }
+  shark.out = data.frame(Species = output[,1], NumberStomachs = output[,2], NumberPreyTypes = output[,3])
+  shark.out$NumberStomachs = as.numeric(as.character(shark.out$NumberStomachs))
+  shark.out$NumberPreyTypes = as.numeric(as.character(shark.out$NumberPreyTypes))
+  return(shark.out)
+}
