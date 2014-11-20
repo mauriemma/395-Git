@@ -1,7 +1,7 @@
 # For loop for similarity comparison
 
 output = c()
-species = c('Carcharhinus leucas','Carcharhinus limbatus','Sphyrna tiburo','Charcharhinus isodon')
+species = c('Carcharhinus leucas','Carcharhinus limbatus','Sphyrna tiburo','Carcharhinus isodon')
 numstomachs = 13
 
 for (species1 in 1:3) {
