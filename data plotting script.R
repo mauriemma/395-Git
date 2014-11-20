@@ -36,22 +36,61 @@ legend(80,9, legend = "Blacktip", pch=1, col="red", bty = "n")
 legend(80,7, legend = "Bonnethead", pch=1, col="blue",bty = "n")
 legend(80,5, legend = "Bull", pch=1, col = "green",bty = "n")
 legend(80,3, legend = "Finetooth", pch=1, col = "orange", bty = "n")
+segments(bull.summary$NumberStomachs, bull.summary$MeanNumPreyTypes, bull.summary$NumberStomachs, bull.summary$MeanNumPreyTypes + bull.summary$SDNumPreyTypes, col = "green")
+segments(bull.summary$NumberStomachs, bull.summary$MeanNumPreyTypes, bull.summary$NumberStomachs, bull.summary$MeanNumPreyTypes - bull.summary$SDNumPreyTypes, col = "green")
 
-#Equal sample size curve plots (13 random stomachs)
-plot(bull.summary$NumberStomachs, bull.out.mean$MeanNumPreyTypes, xlim = c(0,15), ylim = c(0,10),
-     xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", 
-     pch =16 , type ="o")
-points(blacktip.summary$NumberStomachs, blacktip.summary$MeanNumPreyTypes, pch=15, type = "o")
-points(bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes, pch=17, type="o")
-points(finetooth.summary$NumberStomachs, finetooth.summary$MeanNumPreyTypes, pch=18, type="o")
-legend(0,10, legend = "Blacktip", pch=15, bty="n")
-legend(0,9, legend = "Bonnethead", pch=17, bty="n")
-legend(0,8, legend = "Bull", pch=16, bty="n")
-legend(0,7, legend = "Finetooth", pch=18, bty="n")
+segments(finetooth.summary$NumberStomachs, finetooth.summary$MeanNumPreyTypes, finetooth.summary$NumberStomachs, finetooth.summary$MeanNumPreyTypes + finetooth.summary$SDNumPreyTypes, col = "gold")
+segments(finetooth.summary$NumberStomachs, finetooth.summary$MeanNumPreyTypes, finetooth.summary$NumberStomachs, finetooth.summary$MeanNumPreyTypes - finetooth.summary$SDNumPreyTypes, col = "gold")
+
+segments(blacktip.summary$NumberStomachs, blacktip.summary$MeanNumPreyTypes, blacktip.summary$NumberStomachs, blacktip.summary$MeanNumPreyTypes + blacktip.summary$SDNumPreyTypes, col = "red")
+segments(blacktip.summary$NumberStomachs, blacktip.summary$MeanNumPreyTypes, blacktip.summary$NumberStomachs, blacktip.summary$MeanNumPreyTypes - blacktip.summary$SDNumPreyTypes, col = "red")
+
+segments(bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes, bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes + bonnethead.summary$SDNumPreyTypes, col = "blue")
+segments(bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes, bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes - bonnethead.summary$SDNumPreyTypes, col = "blue")
 
 
-#Error bars
-arrows(bull.out.mean$Group.1, bull.out.mean$x, bull.out.mean$Group.1, bull.out.mean$x + bull.out.summary$SDNumPreyTypes, length = 0.1, angle = 90)
-arrows(bull.out.mean$Group.1, bull.out.mean$x, bull.out.mean$Group.1, bull.out.mean$x - bull.out.summary$SDNumPreyTypes, length = 0.1, angle = 90)
-arrows(bonnethead.out.mean$Group.)
+#Equal sample size curve plots with (STDEV) error bars (13 random stomachs)
+    #Shapes
+plot(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, xlim = c(1,15), ylim = c(0,10),xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", pch =16 , type ="o")
+points(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, pch=15, type = "o")
+points(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, pch=17, type="o")
+points(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, pch=18, type="o")
+segments(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes + bull.new.even.summary$SDNumPreyTypes)
+segments(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes - bull.new.even.summary$SDNumPreyTypes)
+
+segments(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes + finetooth.new.even.summary$SDNumPreyTypes)
+segments(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes - finetooth.new.even.summary$SDNumPreyTypes)
+
+segments(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes + blacktip.new.even.summary$SDNumPreyTypes)
+segments(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes - blacktip.new.even.summary$SDNumPreyTypes)
+
+segments(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes + bonnethead.new.even.summary$SDNumPreyTypes)
+segments(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes - bonnethead.new.even.summary$SDNumPreyTypes)
+
+legend(.5,10, legend = "Blacktip", pch=15, bty="n")
+legend(.5,9, legend = "Bonnethead", pch=17, bty="n")
+legend(.5,8, legend = "Bull", pch=16, bty="n")
+legend(.5,7, legend = "Finetooth", pch=18, bty="n")
+
+    #With color
+plot(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, xlim = c(1,15), ylim = c(0,10),xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", type = "o",pch =1, col = "green")
+points(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, pch=1, type = "o", col = "red")
+points(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, pch=1, type="o", col = "blue")
+points(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, pch=1, type="o", col="gold")
+segments(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes + bull.new.even.summary$SDNumPreyTypes, col = "green")
+segments(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes - bull.new.even.summary$SDNumPreyTypes, col = "green")
+
+segments(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes + finetooth.new.even.summary$SDNumPreyTypes, col ="gold")
+segments(finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes, finetooth.new.even.summary$NumberStomachs, finetooth.new.even.summary$MeanNumPreyTypes - finetooth.new.even.summary$SDNumPreyTypes) col="gold"
+
+segments(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes + blacktip.new.even.summary$SDNumPreyTypes, col = "red")
+segments(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes - blacktip.new.even.summary$SDNumPreyTypes, col = "red")
+
+segments(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes + bonnethead.new.even.summary$SDNumPreyTypes, col = "blue")
+segments(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes - bonnethead.new.even.summary$SDNumPreyTypes, col = "blue")
+
+legend(.5,10, legend = "Blacktip", pch=1, bty="n", col="red")
+legend(.5,9, legend = "Bonnethead", pch=1, bty="n",col='blue')
+legend(.5,8, legend = "Bull", pch=1, bty="n",col='green')
+legend(.5,7, legend = "Finetooth", pch=1, bty="n",col= 'gold')
 
