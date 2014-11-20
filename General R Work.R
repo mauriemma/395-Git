@@ -408,3 +408,11 @@ finetooth.out.var = aggregate(finetooth.out$NumberPreyTypes, by = list(finetooth
 finetooth.out.summary = cbind(finetooth.out.mean, finetooth.out.var$x^0.5)
 names(finetooth.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
+
+#Percent prey types 
+> bull.preypercent = data.frame(sum(bullshark.preyfreq$PercentOccurrence[1:5], bullshark.preyfreq$PercentOccurrence[7:9], bullshark.preyfreq$PercentOccurrence[11:12]),sum(bullshark.preyfreq$PercentOccurrence[13:14]), bullshark.preyfreq$PercentOccurrence[6],bullshark.preyfreq$PercentOccurrence[10],bullshark.preyfreq$PercentOccurrence[15])
+> bonnethead.percent = data.frame(sum(bonnethead.preyfreq$PercentOccurrence[2:6], bonnethead.preyfreq$PercentOccurrence[10],bonnethead.preyfreq$PercentOccurrence[12],bonnethead.preyfreq$PercentOccurrence[14]), sum(bonnethead.preyfreq$PercentOccurrence[8], bonnethead.preyfreq$PercentOccurrence[11],bonnethead.preyfreq$PercentOccurrence[16]), sum(bonnethead.preyfreq$PercentOccurrence[9], bonnethead.preyfreq$PercentOccurrence[15]), bonnethead.preyfreq$PercentOccurrence[1],bonnethead.preyfreq$PercentOccurrence[7], bonnethead.preyfreq$PercentOccurrence[13])
+> blacktip.percent = data.frame(sum(blacktip.preyfreq$PercentOccurrence[1:5],blacktip.preyfreq$PercentOccurrence[7:11],blacktip.preyfreq$PercentOccurrence[14:21],blacktip.preyfreq$PercentOccurrence[23:28],blacktip.preyfreq$PercentOccurrence[30:32],blacktip.preyfreq$PercentOccurrence[34:35]),sum(blacktip.preyfreq$PercentOccurrence[6],blacktip.preyfreq$PercentOccurrence[29]),sum(blacktip.preyfreq$PercentOccurrence[22],blacktip.preyfreq$PercentOccurrence[33]),blacktip.preyfreq$PercentOccurrence[12])
+> names(bull.preypercent) = c('Teleosts','Elasmobranchs','Crustaceans','Molluscs','Mammals')
+> names(bonnethead.percent) = c('Crustaceans','Molluscs','Plants','Teleosts','Detritus')
+> names(blacktip.percent)= c('Teleosts','Crustaceans','Polychaetes','Detritus')
