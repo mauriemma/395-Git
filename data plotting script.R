@@ -94,3 +94,11 @@ legend(.5,9, legend = "Bonnethead", pch=1, bty="n",col='blue')
 legend(.5,8, legend = "Bull", pch=1, bty="n",col='green')
 legend(.5,7, legend = "Finetooth", pch=1, bty="n",col= 'gold')
 
+#Plot bar chart by using prey percentages in data matrix
+prey.matrix = matrix(c(92.59,2.47,0,0,0,3.70,0.62,0,0,16.39,49.18,14.75,0,0,0,6.56,6.56,6.56,73.91,6.52,6.52,10.87,2.17,0,0,0,0,100,0,0,0,0,0,0,0,0), 
+        nrow=9, ncol=4, byrow=F, dimnames=list(c('Actinoperygii','Crustaceans','Molluscs','Elasmobranchs','Mammals','Polychaetes','Detritus','Plants', 'Unidentified'), 
+            c('BT','BH','BS','FT')))
+
+barplot(prey.matrix, beside = F, legend.text = T, args.legend = list(x = "right", bty = "n"),ylim=c(0,100), xlim = c(0,8),
+      main= 'Percent Occurrence of Prey Types', xlab = 'Species',ylab = 'Percent Occurrence',
+      col = c('Maroon','Red','Orange','Gold','Dark green','green','cyan','blue','purple'))
