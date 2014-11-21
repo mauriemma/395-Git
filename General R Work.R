@@ -301,15 +301,15 @@ high.all.tab = high.all.tab[order(high.all.tab$Freq, decreasing = T),]
 high.all.tab = high.all.tab[order(high.all.tab$Var1, decreasing = F),]
 
 
-#Freq occurrence of each prey type in each species
+#Freq of each prey type vs all prey types in each species (Percent Number)
 
 --.preyfreq = aggregate(--$tmp_and_unique_source_specimen_id, by = list(--$target_taxon_name),
                               function(x) length(unique(x)))
 
 names(--.preyfreq) = c('PreySpecies','FrequencyOccurrence')
 
-#Add PercentOccurrence
---.preyfreq["PercentOccurrence"] = (--.preyfreq$FrequencyOccurrence)/
+#Add PercentNumber
+--.preyfreq["PercentNumber"] = (--.preyfreq$FrequencyOccurrence)/
             (sum(--.preyfreq$FrequencyOccurrence))*100
 
 #Row bind of all shark data being used
@@ -409,10 +409,18 @@ finetooth.out.summary = cbind(finetooth.out.mean, finetooth.out.var$x^0.5)
 names(finetooth.out.summary) = c('NumberStomachs', 'MeanNumPreyTypes', 'SDNumPreyTypes')
 
 
-#Percent prey types 
-> bull.preypercent = data.frame(sum(bullshark.preyfreq$PercentOccurrence[1:5], bullshark.preyfreq$PercentOccurrence[7:9], bullshark.preyfreq$PercentOccurrence[11:12]),sum(bullshark.preyfreq$PercentOccurrence[13:14]), bullshark.preyfreq$PercentOccurrence[6],bullshark.preyfreq$PercentOccurrence[10],bullshark.preyfreq$PercentOccurrence[15])
-> bonnethead.percent = data.frame(sum(bonnethead.preyfreq$PercentOccurrence[2:6], bonnethead.preyfreq$PercentOccurrence[10],bonnethead.preyfreq$PercentOccurrence[12],bonnethead.preyfreq$PercentOccurrence[14]), sum(bonnethead.preyfreq$PercentOccurrence[8], bonnethead.preyfreq$PercentOccurrence[11],bonnethead.preyfreq$PercentOccurrence[16]), sum(bonnethead.preyfreq$PercentOccurrence[9], bonnethead.preyfreq$PercentOccurrence[15]), bonnethead.preyfreq$PercentOccurrence[1],bonnethead.preyfreq$PercentOccurrence[7], bonnethead.preyfreq$PercentOccurrence[13])
-> blacktip.percent = data.frame(sum(blacktip.preyfreq$PercentOccurrence[1:5],blacktip.preyfreq$PercentOccurrence[7:11],blacktip.preyfreq$PercentOccurrence[14:21],blacktip.preyfreq$PercentOccurrence[23:28],blacktip.preyfreq$PercentOccurrence[30:32],blacktip.preyfreq$PercentOccurrence[34:35]),sum(blacktip.preyfreq$PercentOccurrence[6],blacktip.preyfreq$PercentOccurrence[29]),sum(blacktip.preyfreq$PercentOccurrence[22],blacktip.preyfreq$PercentOccurrence[33]),blacktip.preyfreq$PercentOccurrence[12])
+#Percent Number prey types 
+> bull.preypercent = data.frame(sum(bullshark.preyfreq$PercentNumber[1:5], bullshark.preyfreq$PercentNumber[7:9], bullshark.preyfreq$PercentNumber[11:12]),sum(bullshark.preyfreq$PercentNumber[13:14]), bullshark.preyfreq$PercentNumber[6],bullshark.preyfreq$PercentNumber[10],bullshark.preyfreq$PercentNumber[15])
+> bonnethead.percent = data.frame(sum(bonnethead.preyfreq$PercentNumber[2:6], bonnethead.preyfreq$PercentNumber[10],bonnethead.preyfreq$PercentNumber[12],bonnethead.preyfreq$PercentNumber[14]), sum(bonnethead.preyfreq$PercentNumber[8], bonnethead.preyfreq$PercentNumber[11],bonnethead.preyfreq$PercentNumber[16]), sum(bonnethead.preyfreq$PercentNumber[9], bonnethead.preyfreq$PercentNumber[15]), bonnethead.preyfreq$PercentNumber[1],bonnethead.preyfreq$PercentNumber[7], bonnethead.preyfreq$PercentNumber[13])
+> blacktip.percent = data.frame(sum(blacktip.preyfreq$PercentNumber[1:5],blacktip.preyfreq$PercentNumber[7:11],blacktip.preyfreq$PercentNumber[14:21],blacktip.preyfreq$PercentNumber[23:28],blacktip.preyfreq$PercentNumber[30:32],blacktip.preyfreq$PercentNumber[34:35]),sum(blacktip.preyfreq$PercentNumber[6],blacktip.preyfreq$PercentNumber[29]),sum(blacktip.preyfreq$PercentNumber[22],blacktip.preyfreq$PercentNumber[33]),blacktip.preyfreq$PercentNumber[12])
 > names(bull.preypercent) = c('Teleosts','Elasmobranchs','Crustaceans','Molluscs','Mammals')
 > names(bonnethead.percent) = c('Crustaceans','Molluscs','Plants','Teleosts','Detritus')
 > names(blacktip.percent)= c('Teleosts','Crustaceans','Polychaetes','Detritus')
+
+#Percent Occurrence (number of times a type occurred out of the number of stomachs surveyed)
+
+#Add PercentOccurrence
+finetooth.preyfreq["PercentOccurrence"] = (finetooth.preyfreq$Freq)/(length(unique(finetooth$tmp_and_unique_source_specimen_id)))*100
+
+
+

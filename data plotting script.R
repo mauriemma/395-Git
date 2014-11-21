@@ -100,5 +100,6 @@ prey.matrix = matrix(c(92.59,2.47,0,0,0,3.70,0.62,0,0,16.39,49.18,14.75,0,0,0,6.
             c('BT','BH','BS','FT')))
 
 barplot(prey.matrix, beside = F, legend.text = T, args.legend = list(x = "right", bty = "n"),ylim=c(0,100), xlim = c(0,8),
-      main= 'Percent Occurrence of Prey Types', xlab = 'Species',ylab = 'Percent Occurrence',
+      main= 'Percent Number of Total Prey Types', xlab = 'Species',ylab = 'Percent Number',
       col = c('Maroon','Red','Orange','Gold','Dark green','green','cyan','blue','purple'))
+
