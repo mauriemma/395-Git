@@ -1,4 +1,4 @@
-# For loop for similarity comparison
+# For loop for Jaccard similarity comparison
 
 jaccard.output = c()
 species = c('Carcharhinus leucas','Carcharhinus limbatus','Sphyrna tiburo','Carcharhinus isodon')
@@ -28,10 +28,5 @@ jaccard.out = data.frame(jaccard.output)
 names(jaccard.out) = c('Sp1','Sp2','Similarity')
 jaccard.out['Similarity']= as.numeric(as.character(jaccard.out$Similarity))
 
-#Summary
+#Summary of data
 jaccard.mean = aggregate(jaccard.out$Similarity, by = list(Sp1= jaccard.out$Sp1, Sp2=jaccard.out$Sp2), mean)
-
-#Jaccard values t-test 
-jaccard.t.output= c()
-
-#Table 1. Jaccard Similarity Index values comparing diet items of the four shark species. C. limbatus (Blacktip) and C. isodon (Finetooth) share the strongest similarity, while C. leucas (Bull) and S. tiburo (Bonnethead) share the weakest simillarity
