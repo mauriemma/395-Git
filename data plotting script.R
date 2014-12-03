@@ -1,4 +1,4 @@
-#Plotting prey curves with mean and raw
+#Plotting prey curves with mean and raw data points
 plot(bull.new$NumberStomachs, bull.new$NumberPreyTypes, pch = 16, col = 'gray50', xlim = c(2, 25), ylim=c(1,12), xlab = "Number of Stomachs", ylab = "Number of Prey Types", main = 'Bull Shark')
 points(bull.summary$NumberStomachs, bull.summary$MeanNumPreyTypes, type = "l", col= "red", lwd= 5)
 
@@ -50,7 +50,7 @@ segments(bonnethead.summary$NumberStomachs, bonnethead.summary$MeanNumPreyTypes,
 
 
 #Equal sample size curve plots with (STDEV) error bars (13 random stomachs)
-    #Shapes
+    #With shapes as different species
 plot(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, xlim = c(1,15), ylim = c(0,10),xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", pch =16 , type ="o")
 points(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, pch=15, type = "o")
 points(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, pch=17, type="o")
@@ -72,7 +72,7 @@ legend(.5,9, legend = "Bonnethead", pch=17, bty="n")
 legend(.5,8, legend = "Bull", pch=16, bty="n")
 legend(.5,7, legend = "Finetooth", pch=18, bty="n")
 
-    #With color
+    #With color as different species
 plot(bull.new.even.summary$NumberStomachs, bull.new.even.summary$MeanNumPreyTypes, xlim = c(1,15), ylim = c(0,10),xlab = "Number of Stomachs",ylab = "Number of Prey Types", main = "Equal Sample-Size Randomized Prey Curves", type = "o",pch =1, col = "green")
 points(blacktip.new.even.summary$NumberStomachs, blacktip.new.even.summary$MeanNumPreyTypes, pch=1, type = "o", col = "red")
 points(bonnethead.new.even.summary$NumberStomachs, bonnethead.new.even.summary$MeanNumPreyTypes, pch=1, type="o", col = "blue")
