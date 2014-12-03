@@ -1,5 +1,5 @@
-#Generic function for calculating prey curves by stomach 
----.new = expected.preyitems('Species name', sharks.total)
+#Generic function for calculating/constructing prey curves by stomach
+speciesname.new = expected.preyitems('Species name', sharks.total)
 
 expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
   sharksp = subset(dietdata, source_taxon_name == speciesname)
@@ -22,6 +22,7 @@ expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
   return(shark.out)
 }
 
+#Rarefaction
 prey.rarefaction = function(shark.out) {
   shark.out.mean = aggregate(shark.out$NumberPreyTypes, by = list(shark.out$NumberStomachs), mean)
   shark.out.var = aggregate(shark.out$NumberPreyTypes, by = list(shark.out$NumberStomachs), var)
@@ -31,7 +32,7 @@ prey.rarefaction = function(shark.out) {
 }
 
 
-#For random sample of 13 stomachs, to plot together
+#For random sample of 13 stomachs, to plot data together
 bull.new.even = expected.preyitems('Carcharhinus leucas', sharks.total)
 
 expected.preyitems = function(speciesname, dietdata, numsamples = 100) {
